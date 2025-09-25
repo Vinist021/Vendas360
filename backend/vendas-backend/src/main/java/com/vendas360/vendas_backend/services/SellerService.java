@@ -3,17 +3,22 @@ package com.vendas360.vendas_backend.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.vendas360.vendas_backend.models.Seller;
 import com.vendas360.vendas_backend.repositories.SellerRepository;
 
+import jakarta.persistence.EntityNotFoundException;
+
+@Service
 public class SellerService {
     
     @Autowired
     SellerRepository sellerRepository;
 
     public Seller getById(long id) {
-        return sellerRepository.getReferenceById(id);
+        return sellerRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Seller not found"));
     }
 
     public List<Seller> getAll() {
