@@ -29,7 +29,7 @@ public class SellerService {
         return sellerRepository.save(seller);
     }
 
-    public void update(long id, Seller newSeller) {
+    public Seller update(long id, Seller newSeller) {
         Seller seller = sellerRepository.getReferenceById(id);
 
         seller.setName(newSeller.getName());
@@ -37,7 +37,7 @@ public class SellerService {
         seller.setBonus(newSeller.getBonus());
         seller.setGender(newSeller.getGender());
 
-        sellerRepository.save(seller);
+        return sellerRepository.save(seller);
     }
 
     public void deleteById(long id) {
