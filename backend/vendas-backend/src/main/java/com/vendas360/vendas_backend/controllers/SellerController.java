@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.vendas360.vendas_backend.dtos.SellerRequest;
 import com.vendas360.vendas_backend.dtos.SellerResponse;
 import com.vendas360.vendas_backend.models.Seller;
 import com.vendas360.vendas_backend.services.SellerService;
@@ -40,9 +41,9 @@ public class SellerController {
     }
 
     @PostMapping()
-    public ResponseEntity<Seller> saveSeller(@RequestBody Seller seller) {
+    public ResponseEntity<SellerResponse> saveSeller(@RequestBody SellerRequest sellerRequest) {
 
-        Seller newSeller = sellerService.save(seller);
+        SellerResponse seller = sellerService.save(sellerRequest);
 
         URI location = ServletUriComponentsBuilder
         .fromCurrentRequest()
@@ -50,7 +51,7 @@ public class SellerController {
         .buildAndExpand(seller.getId())
         .toUri();
 
-        return ResponseEntity.created(location).body(newSeller); 
+        return ResponseEntity.created(location).body(seller); 
     }
 
     @PutMapping("{id}")

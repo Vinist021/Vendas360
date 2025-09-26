@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.vendas360.vendas_backend.dtos.SellerRequest;
 import com.vendas360.vendas_backend.dtos.SellerResponse;
 import com.vendas360.vendas_backend.models.Seller;
 import com.vendas360.vendas_backend.repositories.SellerRepository;
@@ -28,8 +29,9 @@ public class SellerService {
                 .toList();                               
     }
 
-    public Seller save(Seller seller) {
-        return sellerRepository.save(seller);
+    public SellerResponse save(SellerRequest sellerRequest) {
+        Seller seller = sellerRepository.save(sellerRequest.toEntity());
+        return seller.toDTO();
     }
 
     public Seller update(long id, Seller newSeller) {
