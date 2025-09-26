@@ -2,6 +2,8 @@ package com.vendas360.vendas_backend.models;
 
 import java.io.Serializable;
 
+import com.vendas360.vendas_backend.dtos.SellerResponse;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -86,6 +88,17 @@ public class Seller implements Serializable {
         } else if (!id.equals(other.id))
             return false;
         return true;
+    }
+
+    public SellerResponse toDTO() {
+        SellerResponse sellerResponse = new SellerResponse();
+        sellerResponse.setId(id);
+        sellerResponse.setName(name);
+        sellerResponse.setSalary(salary);
+        sellerResponse.setBonus(bonus);
+        sellerResponse.setGender(gender);
+
+        return sellerResponse;
     }
 
 }
