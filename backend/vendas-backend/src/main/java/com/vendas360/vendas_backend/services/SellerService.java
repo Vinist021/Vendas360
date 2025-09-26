@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.vendas360.vendas_backend.dtos.SellerResponse;
 import com.vendas360.vendas_backend.models.Seller;
 import com.vendas360.vendas_backend.repositories.SellerRepository;
 
@@ -21,8 +22,10 @@ public class SellerService {
                 .orElseThrow(() -> new EntityNotFoundException("Seller not found"));
     }
 
-    public List<Seller> getAll() {
-        return sellerRepository.findAll();                               
+    public List<SellerResponse> getAll() {
+        return sellerRepository.findAll()
+                .stream().map(s -> s.toDTO())
+                .toList();                               
     }
 
     public Seller save(Seller seller) {
