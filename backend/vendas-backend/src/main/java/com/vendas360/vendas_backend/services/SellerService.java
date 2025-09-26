@@ -17,9 +17,9 @@ public class SellerService {
     @Autowired
     SellerRepository sellerRepository;
 
-    public Seller getById(long id) {
+    public SellerResponse getById(long id) {
         return sellerRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Seller not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Seller not found")).toDTO();
     }
 
     public List<SellerResponse> getAll() {
