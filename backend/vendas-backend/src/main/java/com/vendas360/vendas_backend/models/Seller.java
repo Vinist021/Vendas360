@@ -8,9 +8,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "TBL_SELLER")
@@ -20,22 +17,15 @@ public class Seller implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Name can not be blank")
-    @Size(min = 3, max = 255, message = "Name length must be between 3 and 255 characters")
-    @Column(name = "NAME", length = 100, nullable = false)
+    @Column(name = "NAME", length = 255, nullable = false)
     private String name;
-
-
-    @NotBlank(message = "Salary can not be blank")
-    @Min(value = 1200, message = "Salary must be greater than or equal to 1200.00")    
+  
     @Column(name = "SALARY", nullable = false)
     private Double salary;
 
-    @NotBlank(message = "Bonus can not be blank")
     @Column(name = "BONUS", nullable = false)
     private Double bonus;
 
-    @NotBlank(message = "Gender can not be blank")
     @Column(name = "GENDER", nullable = false)
     private Integer gender;
 
