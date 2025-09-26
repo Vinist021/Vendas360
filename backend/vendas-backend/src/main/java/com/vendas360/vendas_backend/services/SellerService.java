@@ -34,15 +34,15 @@ public class SellerService {
         return seller.toDTO();
     }
 
-    public Seller update(long id, Seller newSeller) {
+    public SellerResponse update(long id, SellerRequest sellerRequest) {
         Seller seller = sellerRepository.getReferenceById(id);
 
-        seller.setName(newSeller.getName());
-        seller.setSalary(newSeller.getSalary());
-        seller.setBonus(newSeller.getBonus());
-        seller.setGender(newSeller.getGender());
+        seller.setName(sellerRequest.getName());
+        seller.setSalary(sellerRequest.getSalary());
+        seller.setBonus(sellerRequest.getBonus());
+        seller.setGender(sellerRequest.getGender());
 
-        return sellerRepository.save(seller);
+        return sellerRepository.save(seller).toDTO();
     }
 
     public void deleteById(long id) {

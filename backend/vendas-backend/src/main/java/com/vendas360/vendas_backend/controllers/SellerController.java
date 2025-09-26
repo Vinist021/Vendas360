@@ -18,7 +18,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.vendas360.vendas_backend.dtos.SellerRequest;
 import com.vendas360.vendas_backend.dtos.SellerResponse;
-import com.vendas360.vendas_backend.models.Seller;
 import com.vendas360.vendas_backend.services.SellerService;
 
 @CrossOrigin
@@ -55,8 +54,8 @@ public class SellerController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Seller> updateSeller(@PathVariable long id, @RequestBody Seller seller ){
-        Seller updatedSeller = sellerService.update(id, seller);
+    public ResponseEntity<SellerResponse> updateSeller(@PathVariable long id, @RequestBody SellerRequest sellerRequest){
+        SellerResponse updatedSeller = sellerService.update(id, sellerRequest);
         return ResponseEntity.ok(updatedSeller);
     }
 
