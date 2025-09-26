@@ -1,5 +1,7 @@
 package com.vendas360.vendas_backend.dtos;
 
+import com.vendas360.vendas_backend.models.Seller;
+
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -66,4 +68,15 @@ public class SellerRequest {
         this.gender = gender;
     }
 
+    public Seller toEntity() {
+        Seller seller = new Seller();
+
+        seller.setId(id);
+        seller.setName(name);
+        seller.setSalary(salary);
+        seller.setBonus(bonus);
+        seller.setGender(gender);
+
+        return seller;
+    }
 }
