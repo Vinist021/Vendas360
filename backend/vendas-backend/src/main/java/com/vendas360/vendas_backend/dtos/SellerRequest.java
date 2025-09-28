@@ -17,13 +17,13 @@ public class SellerRequest {
 
     @NotNull(message = "Salary can not be null")
     @Min(value = 1200, message = "Salary must be greater than or equal to 1200.00")    
-    private Double salary;
+    private double salary;
 
     @NotNull(message = "Bonus can not be null")
-    private Double bonus;
+    private double bonus;
 
     @NotNull(message = "Gender can not be blank")
-    private Integer gender;
+    private int gender;
 
     public SellerRequest() {
     }
@@ -44,27 +44,27 @@ public class SellerRequest {
         this.name = name;
     }
 
-    public Double getSalary() {
+    public double getSalary() {
         return salary;
     }
 
-    public void setSalary(Double salary) {
+    public void setSalary(double salary) {
         this.salary = salary;
     }
 
-    public Double getBonus() {
+    public double getBonus() {
         return bonus;
     }
 
-    public void setBonus(Double bonus) {
+    public void setBonus(double bonus) {
         this.bonus = bonus;
     }
 
-    public Integer getGender() {
+    public int getGender() {
         return gender;
     }
 
-    public void setGender(Integer gender) {
+    public void setGender(int gender) {
         this.gender = gender;
     }
 
