@@ -14,14 +14,21 @@ import jakarta.servlet.http.HttpServletRequest;
 public class ResourceExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<StandardError> validationException(MethodArgumentNotValidException exception, HttpServletRequest request) {
-        StandardError error = new StandardError();
+    public ResponseEntity<ValidationErrors> validationException(MethodArgumentNotValidException exception, HttpServletRequest request) {
+
+        HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
+
+        ValidationErrors error = new ValidationErrors();
         error.setError("Validation error");
         error.setMessage(exception.getMessage());
         error.setPath(request.getRequestURI());
         error.setTimeStamp(Instant.now());
-        error.setStatus(HttpStatus.BAD_REQUEST.value());
+        error.setStatus(status.value());
 
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+        exception.getBindingResult()
+            .getFieldErrors()
+            .forEach(e -> error.addError(e.getDefaultMessage()));
+
+        return ResponseEntity.status(status).body(error);
     }    
 }
