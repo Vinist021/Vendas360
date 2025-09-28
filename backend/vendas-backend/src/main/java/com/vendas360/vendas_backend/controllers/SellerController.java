@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,7 +41,7 @@ public class SellerController {
     }
 
     @PostMapping()
-    public ResponseEntity<SellerResponse> saveSeller(@RequestBody SellerRequest sellerRequest) {
+    public ResponseEntity<SellerResponse> saveSeller(@Validated @RequestBody SellerRequest sellerRequest) {
 
         SellerResponse seller = sellerService.save(sellerRequest);
 
@@ -54,7 +55,7 @@ public class SellerController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<SellerResponse> updateSeller(@PathVariable long id, @RequestBody SellerRequest sellerRequest){
+    public ResponseEntity<SellerResponse> updateSeller(@PathVariable long id, @Validated @RequestBody SellerRequest sellerRequest){
         SellerResponse updatedSeller = sellerService.update(id, sellerRequest);
         return ResponseEntity.ok(updatedSeller);
     }
