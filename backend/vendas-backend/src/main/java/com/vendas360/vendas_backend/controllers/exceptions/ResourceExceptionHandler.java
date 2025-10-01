@@ -11,13 +11,15 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.vendas360.vendas_backend.services.exceptions.DatabaseException;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 
 @ControllerAdvice
 public class ResourceExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ValidationErrors> validationException(MethodArgumentNotValidException exception, HttpServletRequest request) {
+    public ResponseEntity<ValidationErrors> validationException(MethodArgumentNotValidException exception,
+            HttpServletRequest request) {
 
         HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
 
@@ -29,11 +31,11 @@ public class ResourceExceptionHandler {
         error.setStatus(status.value());
 
         exception.getBindingResult()
-            .getFieldErrors()
-            .forEach(e -> error.addError(e.getDefaultMessage()));
+                .getFieldErrors()
+                .forEach(e -> error.addError(e.getDefaultMessage()));
 
         return ResponseEntity.status(status).body(error);
-    }    
+    }
 
     @ExceptionHandler(DatabaseException.class)
     public ResponseEntity<StandardError> DatabaseException(DatabaseException exception, HttpServletRequest request) {
@@ -48,5 +50,20 @@ public class ResourceExceptionHandler {
         error.setStatus(status.value());
 
         return ResponseEntity.status(status).body(error);
-    }    
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<StandardError> EntityNotFoundException(EntityNotFoundException exception, HttpServletRequest request) {
+
+        HttpStatus status = HttpStatus.NOT_FOUND;
+
+        StandardError error = new StandardError();
+        error.setError("Entity not found");
+        error.setMessage(exception.getMessage());
+        error.setPath(request.getRequestURI());
+        error.setTimeStamp(Instant.now());
+        error.setStatus(status.value());
+
+        return ResponseEntity.status(status).body(error);
+    }
 }

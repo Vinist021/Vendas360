@@ -49,7 +49,9 @@ public class SellerService {
 
     public void deleteById(long id) {
         try {
-            sellerRepository.deleteById(id);
+            Seller seller = sellerRepository.findById(id)
+                    .orElseThrow(() -> new EntityNotFoundException("Entidade não encontrada com id " + id));
+            sellerRepository.delete(seller);
         }
         catch(DataIntegrityViolationException e) {
             throw new DatabaseException("Constraint violation, seller can't delete");
