@@ -3,12 +3,14 @@ package com.vendas360.vendas_backend.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.vendas360.vendas_backend.dtos.SellerRequest;
 import com.vendas360.vendas_backend.dtos.SellerResponse;
 import com.vendas360.vendas_backend.models.Seller;
 import com.vendas360.vendas_backend.repositories.SellerRepository;
+import com.vendas360.vendas_backend.services.exceptions.DatabaseException;
 
 import jakarta.persistence.EntityNotFoundException;
 
@@ -46,6 +48,11 @@ public class SellerService {
     }
 
     public void deleteById(long id) {
-        sellerRepository.deleteById(id);
+        try {
+            sellerRepository.deleteById(id);
+        }
+        catch(DataIntegrityViolationException e) {
+            throw new DatabaseException("Constraint violation, seller can't delete");
+        }
     }
 }
