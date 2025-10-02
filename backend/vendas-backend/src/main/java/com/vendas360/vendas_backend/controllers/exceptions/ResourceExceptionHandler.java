@@ -2,7 +2,6 @@ package com.vendas360.vendas_backend.controllers.exceptions;
 
 import java.time.Instant;
 
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;

@@ -37,20 +37,25 @@ public class SellerService {
     }
 
     public SellerResponse update(long id, SellerRequest sellerRequest) {
-        Seller seller = sellerRepository.getReferenceById(id);
-
-        seller.setName(sellerRequest.getName());
-        seller.setSalary(sellerRequest.getSalary());
-        seller.setBonus(sellerRequest.getBonus());
-        seller.setGender(sellerRequest.getGender());
-
-        return sellerRepository.save(seller).toDTO();
+        try{
+            Seller seller = sellerRepository.getReferenceById(id);
+    
+            seller.setName(sellerRequest.getName());
+            seller.setSalary(sellerRequest.getSalary());
+            seller.setBonus(sellerRequest.getBonus());
+            seller.setGender(sellerRequest.getGender());
+    
+            return sellerRepository.save(seller).toDTO();
+        }
+        catch(EntityNotFoundException e) {
+            throw new EntityNotFoundException("Entity not found with this id: " + id);
+        }
     }
 
     public void deleteById(long id) {
         try {
             Seller seller = sellerRepository.findById(id)
-                    .orElseThrow(() -> new EntityNotFoundException("Entidade não encontrada com id " + id));
+                    .orElseThrow(() -> new EntityNotFoundException("Entity not found with this id: " + id));
             sellerRepository.delete(seller);
         }
         catch(DataIntegrityViolationException e) {
