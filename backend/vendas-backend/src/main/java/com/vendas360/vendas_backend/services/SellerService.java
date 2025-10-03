@@ -22,7 +22,7 @@ public class SellerService {
 
     public SellerResponse getById(long id) {
         return sellerRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Seller not found")).toDTO();
+                .orElseThrow(() -> new EntityNotFoundException("Seller not found with this id: " + id)).toDTO();
     }
 
     public List<SellerResponse> getAll() {
@@ -48,14 +48,14 @@ public class SellerService {
             return sellerRepository.save(seller).toDTO();
         }
         catch(EntityNotFoundException e) {
-            throw new EntityNotFoundException("Entity not found with this id: " + id);
+            throw new EntityNotFoundException("Seller not found with this id: " + id);
         }
     }
 
     public void deleteById(long id) {
         try {
             Seller seller = sellerRepository.findById(id)
-                    .orElseThrow(() -> new EntityNotFoundException("Entity not found with this id: " + id));
+                    .orElseThrow(() -> new EntityNotFoundException("Seller not found with this id: " + id));
             sellerRepository.delete(seller);
         }
         catch(DataIntegrityViolationException e) {
