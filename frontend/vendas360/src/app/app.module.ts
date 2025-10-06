@@ -5,12 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SellerFormComponent } from './components/seller-form/seller-form.component';
+import { SellerListComponent } from './components/seller-list/seller-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     SellerFormComponent,
+    SellerListComponent,
   ],
   imports: [
     BrowserModule,
