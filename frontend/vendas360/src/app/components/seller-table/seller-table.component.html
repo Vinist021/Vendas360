@@ -16,7 +16,8 @@
         <td>{{ seller.name }}</td>
         <td>{{ seller.salary }}</td>
         <td>{{ seller.bonus }}</td>
-        <td>{{ seller.gender }}</td>
+        <td>
+          {{ seller.gender == 0 ? 'Masculino' : seller.gender == 1 ? 'Feminino' : 'Outro' }}</td>
         <td class="justify-content-center d-flex">
           <button class="btn btn-sm btn-warning me-2">
             <i class="fa fa-edit">Editar</i>
