@@ -3,27 +3,27 @@
         <h4 class="card-title mb-0">Cadastrar Vendedor</h4>
     </div>
     <div class="card-body">
-        <form>
+        <form #sellerForm="ngForm" (ngSubmit)="onSubmit(sellerForm)">
             <input type="hidden" name="id">
             
             <div class="mb-3">
                 <label for="name" class="form-label">Nome</label>
-                <input type="text" class="form-control" name="name" id="name">
+                <input type="text" class="form-control" name="name" id="name" [(ngModel)]="seller.name" required>
             </div>
 
             <div class="mb-3">
                 <label for="salary" class="form-label">Salário (R$)</label>
-                <input type="number" class="form-control " name="salary" id="salary">
+                <input type="number" class="form-control " name="salary" id="salary" [(ngModel)]="seller.salary" required>
             </div>
 
             <div class="mb-3">
                 <label for="bonus" class="form-label">Bônus (%)</label>
-                <input type="number" class="form-control" name="bonus" id="bonus">
+                <input type="number" class="form-control" name="bonus" id="bonus" [(ngModel)]="seller.bonus" required>
             </div>
 
             <div class="mb-3">
                 <label for="gender" class="form-label">Gênero</label>
-                <select class="form-select" name="gender" id="gender">
+                <select class="form-select" name="gender" id="gender" [(ngModel)]="seller.gender" required>
                     <option value="" disabled selected>Selecione...</option>
                     <option value="0">Feminino</option>
                     <option value="1">Masculino</option>
