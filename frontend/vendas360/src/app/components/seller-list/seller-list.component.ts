@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { map, Observable } from 'rxjs';
+import { SellerSharedService } from 'src/app/services/seller-shared.service';
 
 @Component({
   selector: 'app-seller-list',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SellerListComponent implements OnInit {
 
-  constructor() { }
+  total$: Observable<number>;
+
+  constructor(private sellerService: SellerSharedService) {
+    this.total$ = this.sellerService.sellers$.pipe(
+      map(sellers => sellers.length)
+    );
+   }
 
   ngOnInit(): void {
+    this.sellerService.getSellers().subscribe();
   }
-
 }
