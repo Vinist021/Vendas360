@@ -20,10 +20,10 @@
           {{ seller.gender == 0 ? 'Masculino' : seller.gender == 1 ? 'Feminino' : 'Outro' }}</td>
         <td class="justify-content-center d-flex">
           <button class="btn btn-sm btn-warning me-2">
-            <i class="fa fa-edit">Editar</i>
+            <i>Editar</i>
           </button>
           <button class="btn btn-sm btn-danger">
-            <i class="fa fa-trash">Excluir</i>
+            <i (click)="deleteSeller(seller.id)">Excluir</i>
           </button>
         </td>
       </tr>
