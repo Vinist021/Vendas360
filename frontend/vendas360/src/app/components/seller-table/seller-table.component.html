@@ -11,12 +11,12 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>#1</td>
-        <td>Teste da Silva</td>
-        <td>1200,00</td>
-        <td>10%</td>
-        <td>Masculino</td>
+      <tr *ngFor="let seller of sellers$ | async">
+        <td>#{{ seller.id }}</td>
+        <td>{{ seller.name }}</td>
+        <td>{{ seller.salary }}</td>
+        <td>{{ seller.bonus }}</td>
+        <td>{{ seller.gender }}</td>
         <td class="justify-content-center d-flex">
           <button class="btn btn-sm btn-warning me-2">
             <i class="fa fa-edit">Editar</i>
