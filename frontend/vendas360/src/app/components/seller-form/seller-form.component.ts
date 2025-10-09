@@ -11,26 +11,69 @@ import { SellerSharedService } from 'src/app/services/seller-shared.service';
 })
 export class SellerFormComponent {
 
-    seller: Seller = {} as Seller;
+  seller: Seller = {} as Seller;
+  isEditing = false;
+  formTitle = 'Cadastrar Vendedor';
 
   constructor(private sellerService: SellerSharedService) { }
 
-    onSubmit(form: NgForm) {
+  ngOnInit(): void {
+    this.sellerService.selectedSeller$.subscribe(seller => {
+      if(seller) {
+        this.seller = { ...seller };
+        this.isEditing = true;
+        this.formTitle = 'Editar Vendedor';
+      }
+    });
+  }
+
+  onSubmit(form: NgForm) {
     if (form.invalid) {
       alert('Preencha todos os campos corretamente!');
       return;
     }
 
-     this.sellerService.addSeller(this.seller).subscribe({
-      next: (createdSeller) => {
-        alert(`Vendedor ${createdSeller.name} cadastrado com sucesso!`);
-        form.resetForm(); 
-      },
-      error: (err) => {
-        console.error(err);
-        alert('Ocorreu um erro ao salvar o vendedor.');
-      }
-    });
+    if (this.isEditing) {
+      this.sellerService.updateSeller(this.seller).subscribe({
+        next: (updatedSeller) => {
+          alert(`Vendedor ${updatedSeller.name} atualizado com sucesso!`);
+          this.resetForm(form);
+        },
+        error: (err) => {
+          console.error(err);
+          alert('Ocorreu um erro ao atualizar o vendedor.');
+        }
+      });
+    } else {
+      this.sellerService.addSeller(this.seller).subscribe({
+        next: (newSeller) => {
+          alert(`Vendedor ${newSeller.name} cadastrado com sucesso!`);
+          this.resetForm(form);
+        },
+        error: (err) => {
+          console.error(err);
+          alert('Ocorreu um erro ao cadastrar o vendedor.');
+        }
+      });
+    }
   }
 
+  editSeller(seller: Seller) {
+    this.seller = { ...seller };
+    this.isEditing = true;
+    this.formTitle = 'Editar Vendedor';
+  }
+
+  cancelEdit(form: NgForm) {
+    this.resetForm(form);
+  }
+
+  private resetForm(form: NgForm) {
+    form.resetForm();
+    this.seller = {} as Seller;
+    this.isEditing = false;
+    this.formTitle = 'Cadastrar Vendedor';
+  }
 }
+
+

@@ -1,10 +1,10 @@
 <div class="card shadow ms-5 mb-5">
     <div class="card-header bg-primary text-white text-center">
-        <h4 class="card-title mb-0">Cadastrar Vendedor</h4>
+        <h4 class="card-title mb-0">{{ formTitle }}</h4>
     </div>
     <div class="card-body">
         <form #sellerForm="ngForm" (ngSubmit)="onSubmit(sellerForm)">
-            <input type="hidden" name="id">
+            <input type="hidden" name="id" [(ngModel)]="seller.id">
             
             <div class="mb-3">
                 <label for="name" class="form-label">Nome</label>
@@ -32,7 +32,11 @@
             </div>
 
             <div class="d-grid gap-2">
-                <button type="submit" class="btn btn-primary" id="btn-submit">Cadastrar</button>
+                <button *ngIf="!isEditing" type="submit" class="btn btn-primary" id="btn-submit">Cadastrar</button>
+            </div>
+            <div *ngIf="isEditing" class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary">Atualizar</button>
+                <button type="submit" class="btn btn-secondary" (click)="cancelEdit(sellerForm)">Cancelar</button>
             </div>
         </form>
     </div>

@@ -33,4 +33,7 @@ export class SellerTableComponent implements OnInit {
     }
   }
 
+  editSeller(seller: Seller) {
+    this.sellerService.selectSellerForEdit(seller);
+  }
 }

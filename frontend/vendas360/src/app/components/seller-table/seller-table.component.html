@@ -19,11 +19,11 @@
         <td>
           {{ seller.gender == 0 ? 'Masculino' : seller.gender == 1 ? 'Feminino' : 'Outro' }}</td>
         <td class="justify-content-center d-flex">
-          <button class="btn btn-sm btn-warning me-2">
+          <button class="btn btn-sm btn-warning me-2" (click)="editSeller(seller)">
             <i>Editar</i>
           </button>
-          <button class="btn btn-sm btn-danger">
-            <i (click)="deleteSeller(seller.id)">Excluir</i>
+          <button class="btn btn-sm btn-danger" (click)="deleteSeller(seller.id)">
+            <i>Excluir</i>
           </button>
         </td>
       </tr>

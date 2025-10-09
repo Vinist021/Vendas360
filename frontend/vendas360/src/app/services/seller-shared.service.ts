@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, throwError} from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, finalize, switchMap, take, tap } from 'rxjs/operators';
 import { Seller } from '../interfaces/Seller';
 import { HttpClient } from '@angular/common/http';
@@ -25,10 +25,14 @@ export class SellerSharedService {
   private errorSource = new BehaviorSubject<string | null>(null);
   readonly error$ = this.errorSource.asObservable();
 
+  // Seleção de vendedor para edição
+  private selectedSellerSource = new BehaviorSubject<Seller | null>(null);
+  readonly selectedSeller$ = this.selectedSellerSource.asObservable();
+
   constructor(private http: HttpClient) { }
 
 
-getSellers(): Observable<Seller[]> {
+  getSellers(): Observable<Seller[]> {
     this.loadingSource.next(true);
     return this.http.get<Seller[]>(this.API_URL).pipe(
       tap(sellers => {
@@ -95,7 +99,7 @@ getSellers(): Observable<Seller[]> {
     );
   }
 
-    private handleError(message: string, err: any) {
+  private handleError(message: string, err: any) {
     console.error(message, err);
     this.errorSource.next(message);
     this.loadingSource.next(false);
@@ -104,6 +108,14 @@ getSellers(): Observable<Seller[]> {
 
   clearError() {
     this.errorSource.next(null);
+  }
+
+  selectSellerForEdit(seller: Seller) {
+    this.selectedSellerSource.next(seller);
+  }
+
+  clearSelectedSeller() {
+    this.selectedSellerSource.next(null);
   }
 }
 
