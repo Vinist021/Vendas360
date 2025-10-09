@@ -13,9 +13,9 @@
     <tbody>
       <tr *ngFor="let seller of sellers$ | async">
         <td class="fw-bold">#{{ seller.id }}</td>
-        <td class="table-text">{{ seller.name }}</td>
+        <td class="table-text">{{ seller.name}}</td>
         <td class="table-text">{{ seller.salary | currency: 'BRL' }}</td>
-        <td class="table-text">{{ seller.bonus }}</td>
+        <td class="table-text">{{ (seller.bonus / 100) | percent: '1.2-2'}}</td>
         <td class="table-text">
           {{ seller.gender == 0 ? 'Masculino' : seller.gender == 1 ? 'Feminino' : 'Outro' }}</td>
         <td class="justify-content-center d-flex">
