@@ -12,11 +12,11 @@
     </thead>
     <tbody>
       <tr *ngFor="let seller of sellers$ | async">
-        <td>#{{ seller.id }}</td>
-        <td>{{ seller.name }}</td>
-        <td>{{ seller.salary }}</td>
-        <td>{{ seller.bonus }}</td>
-        <td>
+        <td class="fw-bold">#{{ seller.id }}</td>
+        <td class="table-text">{{ seller.name }}</td>
+        <td class="table-text">{{ seller.salary }}</td>
+        <td class="table-text">{{ seller.bonus }}</td>
+        <td class="table-text">
           {{ seller.gender == 0 ? 'Masculino' : seller.gender == 1 ? 'Feminino' : 'Outro' }}</td>
         <td class="justify-content-center d-flex">
           <button class="btn btn-sm btn-warning me-2" (click)="editSeller(seller)">
