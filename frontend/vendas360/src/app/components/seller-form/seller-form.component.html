@@ -35,7 +35,7 @@
                 <button *ngIf="!isEditing" type="submit" class="btn btn-primary" id="btn-submit">Cadastrar</button>
             </div>
             <div *ngIf="isEditing" class="d-grid gap-2">
-                <button type="submit" class="btn btn-primary">Atualizar</button>
+                <button type="submit" class="btn btn-warning">Atualizar</button>
                 <button type="submit" class="btn btn-secondary" (click)="cancelEdit(sellerForm)">Cancelar</button>
             </div>
         </form>
