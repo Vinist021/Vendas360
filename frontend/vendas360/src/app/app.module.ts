@@ -4,11 +4,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
+import { LOCALE_ID } from '@angular/core';
+import  locale_pt  from '@angular/common/locales/pt';
+
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SellerFormComponent } from './components/seller-form/seller-form.component';
 import { SellerListComponent } from './components/seller-list/seller-list.component';
 import { SellerTableComponent } from './components/seller-table/seller-table.component';
+import { registerLocaleData } from '@angular/common';
+
+registerLocaleData(locale_pt);
 
 @NgModule({
   declarations: [
@@ -24,7 +30,9 @@ import { SellerTableComponent } from './components/seller-table/seller-table.com
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    {provide: LOCALE_ID, useValue: 'pt-BR'}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
