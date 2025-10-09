@@ -13,6 +13,7 @@ import { SellerFormComponent } from './components/seller-form/seller-form.compon
 import { SellerListComponent } from './components/seller-list/seller-list.component';
 import { SellerTableComponent } from './components/seller-table/seller-table.component';
 import { registerLocaleData } from '@angular/common';
+import { EmptyTableMsgComponent } from './components/empty-table-msg/empty-table-msg.component';
 
 registerLocaleData(locale_pt);
 
@@ -23,6 +24,7 @@ registerLocaleData(locale_pt);
     SellerFormComponent,
     SellerListComponent,
     SellerTableComponent,
+    EmptyTableMsgComponent,
   ],
   imports: [
     BrowserModule,

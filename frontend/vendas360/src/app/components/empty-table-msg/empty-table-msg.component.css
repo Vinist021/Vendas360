@@ -1,0 +1,23 @@
+/* ===== MENSAGEM VAZIA ===== */
+#empty-message {
+    padding: 3rem 1rem;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    border-radius: 12px;
+    margin: 1rem 0;
+}
+
+#empty-message i {
+    color: #6c757d;
+    margin-bottom: 1rem;
+}
+
+#empty-message p {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.sad-image {
+    width: 7.5%; 
+    height: auto; 
+    filter: brightness(60%) grayscale(50%);
+}

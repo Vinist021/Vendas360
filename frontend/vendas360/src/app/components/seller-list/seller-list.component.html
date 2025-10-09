@@ -5,7 +5,7 @@
   </div>
 
   <div class="card-body">
-    <app-seller-table></app-seller-table>
+    <app-seller-table *ngIf="(total$ | async)"></app-seller-table>
+    <app-empty-table-msg *ngIf="!(total$ | async)"></app-empty-table-msg>
   </div>
-
 </div>
