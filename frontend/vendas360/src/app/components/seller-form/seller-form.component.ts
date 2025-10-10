@@ -29,7 +29,7 @@ export class SellerFormComponent {
 
   onSubmit(form: NgForm) {
     if (form.invalid) {
-      alert('Preencha todos os campos corretamente!');
+      alert('Todos os campos devem ser preenchidos corretamente.');
       return;
     }
 

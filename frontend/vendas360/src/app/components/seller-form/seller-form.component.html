@@ -5,30 +5,55 @@
     <div class="card-body">
         <form #sellerForm="ngForm" (ngSubmit)="onSubmit(sellerForm)">
             <input type="hidden" name="id" [(ngModel)]="seller.id">
-            
+
             <div class="mb-3">
                 <label for="name" class="form-label">Nome</label>
-                <input type="text" class="form-control" name="name" id="name" [(ngModel)]="seller.name" required>
+                <input type="text" class="form-control" name="name" id="name" [(ngModel)]="seller.name"
+                    #nameInput="ngModel" minlength="3" required>
+                <small *ngIf="sellerForm.submitted && nameInput.invalid" class="text-danger text-small ms-2">
+                    <span *ngIf="nameInput.errors?.['required']">* O nome é requerido.</span>
+
+                    <span *ngIf="!nameInput.errors?.['required'] && nameInput.errors?.['minlength']">
+                        * Mínimo de 3 caracteres.
+                    </span>
+                </small>
+
             </div>
 
             <div class="mb-3">
                 <label for="salary" class="form-label">Salário (R$)</label>
-                <input type="number" class="form-control " name="salary" id="salary" [(ngModel)]="seller.salary" required>
+                <input type="number" class="form-control " name="salary" id="salary" [(ngModel)]="seller.salary"
+                    #salaryInput="ngModel" min="1500" required>
+                <small *ngIf="sellerForm.submitted && salaryInput.invalid" class="text-danger text-small ms-2">
+                    <span *ngIf="salaryInput.errors?.['required']">* O salário é requerido.</span>
+
+                    <span *ngIf="!salaryInput.errors?.['required'] && salaryInput.errors?.['min']">
+                        * Mínimo de R$ 1500,00.
+                    </span>
+                </small>
             </div>
 
             <div class="mb-3">
                 <label for="bonus" class="form-label">Bônus (%)</label>
-                <input type="number" class="form-control" name="bonus" id="bonus" [(ngModel)]="seller.bonus" required>
+                <input type="number" class="form-control" name="bonus" id="bonus" [(ngModel)]="seller.bonus"
+                    #bonusInput="ngModel" required>
+                <small *ngIf="sellerForm.submitted && bonusInput.invalid" class="text-danger text-small ms-2">
+                    <span *ngIf="bonusInput.errors?.['required']">* O gênero é requerido.</span>
+                </small>
             </div>
 
             <div class="mb-3">
                 <label for="gender" class="form-label">Gênero</label>
-                <select class="form-select" name="gender" id="gender" [(ngModel)]="seller.gender" required>
+                <select class="form-select" name="gender" id="gender" [(ngModel)]="seller.gender" #genderInput="ngModel"
+                    required>
                     <option value="" disabled selected>Selecione...</option>
                     <option value="0">Feminino</option>
                     <option value="1">Masculino</option>
                     <option value="2">Outro</option>
                 </select>
+                <small *ngIf="sellerForm.submitted && genderInput.invalid" class="text-danger text-small ms-2">
+                    <span *ngIf="genderInput.errors?.['required']">* O gênero é requerido.</span>
+                </small>
             </div>
 
             <div class="d-grid gap-2">
