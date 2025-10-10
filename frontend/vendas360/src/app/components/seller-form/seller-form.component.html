@@ -6,7 +6,7 @@
         <form #sellerForm="ngForm" (ngSubmit)="onSubmit(sellerForm)">
             <input type="hidden" name="id" [(ngModel)]="seller.id">
 
-            <div class="mb-3">
+            <div class="mb-2">
                 <label for="name" class="form-label">Nome</label>
                 <input type="text" class="form-control" name="name" id="name" [(ngModel)]="seller.name"
                     #nameInput="ngModel" minlength="3" required>
@@ -20,7 +20,7 @@
 
             </div>
 
-            <div class="mb-3">
+            <div class="mb-2">
                 <label for="salary" class="form-label">Salário (R$)</label>
                 <input type="number" class="form-control " name="salary" id="salary" [(ngModel)]="seller.salary"
                     #salaryInput="ngModel" min="1500" required>
@@ -33,12 +33,12 @@
                 </small>
             </div>
 
-            <div class="mb-3">
+            <div class="mb-2">
                 <label for="bonus" class="form-label">Bônus (%)</label>
                 <input type="number" class="form-control" name="bonus" id="bonus" [(ngModel)]="seller.bonus"
                     #bonusInput="ngModel" required>
                 <small *ngIf="sellerForm.submitted && bonusInput.invalid" class="text-danger text-small ms-2">
-                    <span *ngIf="bonusInput.errors?.['required']">* O gênero é requerido.</span>
+                    <span *ngIf="bonusInput.errors?.['required']">* O bônus é requerido.</span>
                 </small>
             </div>
 
