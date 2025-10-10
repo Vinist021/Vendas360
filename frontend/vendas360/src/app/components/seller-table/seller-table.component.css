@@ -1,4 +1,36 @@
 .table-text {
-    font-weight: 600;
-    color: #3b4146;
+  font-weight: 600;
+  color: #3b4146;
+}
+
+.table-scroll {
+  max-height: 500px;
+  min-height: 100px;
+  overflow-y: auto; 
+  overflow-x: hidden; 
+}
+
+.table-scroll table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-scroll thead {
+  position: sticky;
+  top: 0;
+  background-color: #343a40; 
+  color: #fff;
+  z-index: 2;
+  line-height: 1.5; /* aumenta o espaço vertical entre linhas de texto */
+} 
+
+
+@media (max-width: 768px) {
+  .table-scroll {
+    overflow-x: auto; 
+  }
+
+  .table-scroll table {
+    min-width: 600px; 
+  }
 }
