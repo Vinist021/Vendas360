@@ -1,14 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Seller } from 'src/app/interfaces/Seller';
 import { SellerSharedService } from 'src/app/services/seller-shared.service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-seller-form',
   templateUrl: './seller-form.component.html',
   styleUrls: ['./seller-form.component.css']
 })
-export class SellerFormComponent implements OnInit {
+export class SellerFormComponent implements OnInit, OnDestroy {
+
+  private destroy$ = new Subject<void>();
 
   sellerForm!: FormGroup;
   isEditing = false;
@@ -17,7 +20,7 @@ export class SellerFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private sellerService: SellerSharedService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
 
@@ -29,13 +32,20 @@ export class SellerFormComponent implements OnInit {
       gender: ['', Validators.required]
     });
 
-    this.sellerService.selectedSeller$.subscribe(seller => {
-      if (seller) {
-        this.sellerForm.patchValue(seller);
-        this.isEditing = true;
-        this.formTitle = 'Editar Vendedor';
-      }
-    });
+    this.sellerService.selectedSeller$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(seller => {
+        if (seller) {
+          this.sellerForm.patchValue(seller);
+          this.isEditing = true;
+          this.formTitle = 'Editar Vendedor';
+        }
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   onSubmit() {
