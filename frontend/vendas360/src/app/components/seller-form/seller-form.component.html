@@ -1,68 +1,85 @@
 <div class="card shadow ms-5 mb-5">
-    <div class="card-header bg-primary text-white text-center">
-        <h4 class="card-title mb-0">{{ formTitle }}</h4>
-    </div>
-    <div class="card-body">
-        <form #sellerForm="ngForm" (ngSubmit)="onSubmit(sellerForm)">
-            <input type="hidden" name="id" [(ngModel)]="seller.id">
+  <div class="card-header bg-primary text-white text-center">
+    <h4 class="card-title mb-0">{{ formTitle }}</h4>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="sellerForm" (ngSubmit)="onSubmit()">
+      <input type="hidden" formControlName="id" />
 
-            <div class="mb-2">
-                <label for="name" class="form-label">Nome</label>
-                <input type="text" class="form-control" name="name" id="name" [(ngModel)]="seller.name"
-                    #nameInput="ngModel" minlength="3" required>
-                <small *ngIf="sellerForm.submitted && nameInput.invalid" class="text-danger text-small ms-2">
-                    <span *ngIf="nameInput.errors?.['required']">* O nome é requerido.</span>
+      <div class="mb-2">
+        <label for="name" class="form-label">Nome</label>
+        <input type="text"
+          class="form-control"
+          id="name"
+          formControlName="name"
+        />
+        <small *ngIf="name?.touched && name?.invalid" class="text-danger text-small ms-2">
+          <span *ngIf="name?.errors?.['required']"> O nome é requerido.</span>
+          <span *ngIf="name?.errors?.['minlength']">* Mínimo de 3 caracteres.</span
+          >
+        </small>
+      </div>
 
-                    <span *ngIf="!nameInput.errors?.['required'] && nameInput.errors?.['minlength']">
-                        * Mínimo de 3 caracteres.
-                    </span>
-                </small>
+      <div class="mb-2">
+        <label for="salary" class="form-label">Salário (R$)</label>
+        <input
+          type="text"
+          class="form-control"
+          id="salary"
+          formControlName="salary"
+          mask="separator.2"
+          thousandSeparator="."
+          decimalMarker=","
+          prefix="R$ "
+        />
+        <small *ngIf="salary?.touched && salary?.invalid" class="text-danger text-small ms-2">
+          <span *ngIf="salary?.errors?.['required']">* O salário é requerido.</span>
+          <span *ngIf="salary?.errors?.['min']">* Mínimo de R$ 1500,00.</span>
+        </small>
+      </div>
 
-            </div>
+      <div class="mb-2">
+        <label for="bonus" class="form-label">Bônus (%)</label>
+        <input
+          type="number"
+          class="form-control"
+          id="bonus"
+          formControlName="bonus"
+        />
+        <small *ngIf="bonus?.touched && bonus?.invalid" class="text-danger text-small ms-2">
+          <span *ngIf="bonus?.errors?.['required']">* O bônus é requerido.</span>
+        </small>
+      </div>
 
-            <div class="mb-2">
-                <label for="salary" class="form-label">Salário (R$)</label>
-                <input type="number" class="form-control " name="salary" id="salary" [(ngModel)]="seller.salary"
-                    #salaryInput="ngModel" min="1500" required>
-                <small *ngIf="sellerForm.submitted && salaryInput.invalid" class="text-danger text-small ms-2">
-                    <span *ngIf="salaryInput.errors?.['required']">* O salário é requerido.</span>
+      <div class="mb-3">
+        <label for="gender" class="form-label">Gênero</label>
+        <select class="form-select" id="gender" formControlName="gender">
+          <option value="" disabled selected>Selecione...</option>
+          <option value="0">Feminino</option>
+          <option value="1">Masculino</option>
+          <option value="2">Outro</option>
+        </select>
+        <small
+          *ngIf="gender?.touched && gender?.invalid"
+          class="text-danger text-small ms-2"
+        >
+          <span *ngIf="gender?.errors?.['required']"
+            >* O gênero é requerido.</span
+          >
+        </small>
+      </div>
 
-                    <span *ngIf="!salaryInput.errors?.['required'] && salaryInput.errors?.['min']">
-                        * Mínimo de R$ 1500,00.
-                    </span>
-                </small>
-            </div>
-
-            <div class="mb-2">
-                <label for="bonus" class="form-label">Bônus (%)</label>
-                <input type="number" class="form-control" name="bonus" id="bonus" [(ngModel)]="seller.bonus"
-                    #bonusInput="ngModel" required>
-                <small *ngIf="sellerForm.submitted && bonusInput.invalid" class="text-danger text-small ms-2">
-                    <span *ngIf="bonusInput.errors?.['required']">* O bônus é requerido.</span>
-                </small>
-            </div>
-
-            <div class="mb-3">
-                <label for="gender" class="form-label">Gênero</label>
-                <select class="form-select" name="gender" id="gender" [(ngModel)]="seller.gender" #genderInput="ngModel"
-                    required>
-                    <option value="" disabled selected>Selecione...</option>
-                    <option value="0">Feminino</option>
-                    <option value="1">Masculino</option>
-                    <option value="2">Outro</option>
-                </select>
-                <small *ngIf="sellerForm.submitted && genderInput.invalid" class="text-danger text-small ms-2">
-                    <span *ngIf="genderInput.errors?.['required']">* O gênero é requerido.</span>
-                </small>
-            </div>
-
-            <div class="d-grid gap-2">
-                <button *ngIf="!isEditing" type="submit" class="btn btn-primary" id="btn-submit">Cadastrar</button>
-            </div>
-            <div *ngIf="isEditing" class="d-grid gap-2">
-                <button type="submit" class="btn btn-warning">Atualizar</button>
-                <button type="submit" class="btn btn-secondary" (click)="cancelEdit(sellerForm)">Cancelar</button>
-            </div>
-        </form>
-    </div>
+      <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-primary" *ngIf="!isEditing">
+          Cadastrar
+        </button>
+        <button type="submit" class="btn btn-warning" *ngIf="isEditing">
+          Atualizar
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="cancelEdit()">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
 </div>

@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 import { LOCALE_ID } from '@angular/core';
 import  locale_pt  from '@angular/common/locales/pt';
@@ -14,6 +16,7 @@ import { SellerListComponent } from './components/seller-list/seller-list.compon
 import { SellerTableComponent } from './components/seller-table/seller-table.component';
 import { registerLocaleData } from '@angular/common';
 import { EmptyTableMsgComponent } from './components/empty-table-msg/empty-table-msg.component';
+import { NgxMaskModule } from 'ngx-mask';
 
 registerLocaleData(locale_pt);
 
@@ -30,7 +33,9 @@ registerLocaleData(locale_pt);
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    NgxMaskModule.forRoot(),
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'pt-BR'}
