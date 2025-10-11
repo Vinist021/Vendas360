@@ -92,6 +92,18 @@ export class SellerFormComponent implements OnInit, OnDestroy {
     this.formTitle = 'Cadastrar Vendedor';
   }
 
+  getFieldClass(field: string): string {
+    const control = this.sellerForm.get(field);
+    if (!control) return '';
+    if(control.untouched) {
+     return control.valid ? 'is-valid' : '';
+    }
+    if (control.touched) {
+      return control.valid ? 'is-valid' : 'is-invalid';
+    }
+    return '';
+  }
+
   get name() { return this.sellerForm.get('name'); }
   get salary() { return this.sellerForm.get('salary'); }
   get bonus() { return this.sellerForm.get('bonus'); }

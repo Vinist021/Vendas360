@@ -8,7 +8,7 @@
 
             <div class="mb-2">
                 <label for="name" class="form-label">Nome</label>
-                <input type="text" class="form-control" id="name" formControlName="name" />
+                <input type="text" class="form-control" id="name" formControlName="name" [class]="getFieldClass('name')"/>
                 <small *ngIf="name?.touched && name?.invalid" class="text-danger text-small ms-2">
                     <span *ngIf="name?.errors?.['required']"> O nome é requerido.</span>
                     <span *ngIf="name?.errors?.['minlength']">* Mínimo de 3 caracteres.</span>
@@ -17,8 +17,8 @@
 
             <div class="mb-2">
                 <label for="salary" class="form-label">Salário (R$)</label>
-                <input type="text" class="form-control" id="salary" formControlName="salary" mask="separator.2"
-                    thousandSeparator="." decimalMarker="," prefix="R$ " />
+                <input type="text" class="form-control" id="salary" formControlName="salary" [class]="getFieldClass('salary')"
+                     mask="separator.2" thousandSeparator="." decimalMarker="," prefix="R$ " />
                 <small *ngIf="salary?.touched && salary?.invalid" class="text-danger text-small ms-2">
                     <span *ngIf="salary?.errors?.['required']">* O salário é requerido.</span>
                     <span *ngIf="salary?.errors?.['min']">* Mínimo de R$ 1500,00.</span>
@@ -27,8 +27,8 @@
 
             <div class="mb-2">
                 <label for="bonus" class="form-label">Bônus (%)</label>
-                <input type="text" class="form-control" id="bonus" formControlName="bonus" mask="separator.2"
-                    thousandSeparator="." decimalMarker="," suffix=" %" />
+                <input type="text" class="form-control" id="bonus" formControlName="bonus" [class]="getFieldClass('bonus')"
+                mask="separator.2" thousandSeparator="." decimalMarker="," suffix=" %" />
                 <small *ngIf="bonus?.touched && bonus?.invalid" class="text-danger text-small ms-2">
                     <span *ngIf="bonus?.errors?.['required']">* O bônus é requerido.</span>
                 </small>
@@ -36,7 +36,7 @@
 
             <div class="mb-3">
                 <label for="gender" class="form-label">Gênero</label>
-                <select class="form-select" id="gender" formControlName="gender">
+                <select class="form-select" id="gender" formControlName="gender" [class]="getFieldClass('gender')">
                     <option value="" disabled selected>Selecione...</option>
                     <option value="0">Feminino</option>
                     <option value="1">Masculino</option>
