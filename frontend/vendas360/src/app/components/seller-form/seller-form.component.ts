@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Seller } from 'src/app/interfaces/Seller';
 import { SellerSharedService } from 'src/app/services/seller-shared.service';
 import { Subject, takeUntil } from 'rxjs';
+import { MessageService } from 'src/app/services/message-service';
 
 @Component({
   selector: 'app-seller-form',
@@ -17,9 +18,13 @@ export class SellerFormComponent implements OnInit, OnDestroy {
   isEditing = false;
   formTitle = 'Cadastrar Vendedor';
 
+  message: string = '';
+  messageType: 'success' | 'error' | '' = '';
+
   constructor(
     private fb: FormBuilder,
-    private sellerService: SellerSharedService
+    private sellerService: SellerSharedService,
+    private messageService: MessageService
   ) { }
 
   ngOnInit(): void {
@@ -60,26 +65,27 @@ export class SellerFormComponent implements OnInit, OnDestroy {
     if (this.isEditing) {
       this.sellerService.updateSeller(seller).subscribe({
         next: updatedSeller => {
-          alert(`Vendedor ${updatedSeller.name} atualizado com sucesso!`);
+          this.messageService.showMessage(`Vendedor ${updatedSeller.name} atualizado com sucesso!`, 'success');
           this.resetForm();
         },
         error: err => {
           console.error(err);
-          alert('Ocorreu um erro ao atualizar o vendedor.');
+          this.messageService.showMessage('Ocorreu um erro ao atualizar o vendedor.', 'error');
         }
       });
     } else {
       this.sellerService.addSeller(seller).subscribe({
         next: newSeller => {
-          alert(`Vendedor ${newSeller.name} cadastrado com sucesso!`);
+          this.messageService.showMessage(`Vendedor ${newSeller.name} cadastrado com sucesso!`, 'success');
           this.resetForm();
         },
         error: err => {
           console.error(err);
-          alert('Ocorreu um erro ao cadastrar o vendedor.');
+          this.messageService.showMessage(`Ocorreu um erro ao cadastrar o vendedor`, 'error');
         }
       });
     }
+
   }
 
   cancelEdit() {
@@ -95,8 +101,8 @@ export class SellerFormComponent implements OnInit, OnDestroy {
   getFieldClass(field: string): string {
     const control = this.sellerForm.get(field);
     if (!control) return '';
-    if(control.untouched) {
-     return control.valid ? 'is-valid' : '';
+    if (control.untouched) {
+      return control.valid ? 'is-valid' : '';
     }
     if (control.touched) {
       return control.valid ? 'is-valid' : 'is-invalid';
