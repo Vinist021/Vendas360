@@ -21,6 +21,8 @@ export class SellerFormComponent implements OnInit, OnDestroy {
   message: string = '';
   messageType: 'success' | 'error' | '' = '';
 
+  isLoading = false;
+
   constructor(
     private fb: FormBuilder,
     private sellerService: SellerSharedService,
@@ -45,6 +47,12 @@ export class SellerFormComponent implements OnInit, OnDestroy {
           this.isEditing = true;
           this.formTitle = 'Editar Vendedor';
         }
+      });
+
+    this.sellerService.loading$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(loading => {
+        this.isLoading = loading;
       });
   }
 

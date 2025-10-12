@@ -8,7 +8,8 @@
 
             <div class="mb-2">
                 <label for="name" class="form-label">Nome</label>
-                <input type="text" class="form-control" id="name" formControlName="name" [class]="getFieldClass('name')"/>
+                <input type="text" class="form-control" id="name" formControlName="name"
+                    [class]="getFieldClass('name')" />
                 <small *ngIf="name?.touched && name?.invalid" class="text-danger text-small ms-2">
                     <span *ngIf="name?.errors?.['required']"> O nome é requerido.</span>
                     <span *ngIf="name?.errors?.['minlength']">* Mínimo de 3 caracteres.</span>
@@ -17,8 +18,9 @@
 
             <div class="mb-2">
                 <label for="salary" class="form-label">Salário (R$)</label>
-                <input type="text" class="form-control" id="salary" formControlName="salary" [class]="getFieldClass('salary')"
-                     mask="separator.2" thousandSeparator="." decimalMarker="," prefix="R$ " />
+                <input type="text" class="form-control" id="salary" formControlName="salary"
+                    [class]="getFieldClass('salary')" mask="separator.2" thousandSeparator="." decimalMarker=","
+                    prefix="R$ " />
                 <small *ngIf="salary?.touched && salary?.invalid" class="text-danger text-small ms-2">
                     <span *ngIf="salary?.errors?.['required']">* O salário é requerido.</span>
                     <span *ngIf="salary?.errors?.['min']">* Mínimo de R$ 1500,00.</span>
@@ -27,8 +29,9 @@
 
             <div class="mb-2">
                 <label for="bonus" class="form-label">Bônus (%)</label>
-                <input type="text" class="form-control" id="bonus" formControlName="bonus" [class]="getFieldClass('bonus')"
-                mask="separator.2" thousandSeparator="." decimalMarker="," suffix=" %" />
+                <input type="text" class="form-control" id="bonus" formControlName="bonus"
+                    [class]="getFieldClass('bonus')" mask="separator.2" thousandSeparator="." decimalMarker=","
+                    suffix=" %" />
                 <small *ngIf="bonus?.touched && bonus?.invalid" class="text-danger text-small ms-2">
                     <span *ngIf="bonus?.errors?.['required']">* O bônus é requerido.</span>
                 </small>
@@ -48,14 +51,29 @@
             </div>
 
             <div class="d-grid gap-2">
-                <button type="submit" class="btn btn-primary" *ngIf="!isEditing">
-                    Cadastrar
+
+                <button type="submit" class="btn btn-primary" *ngIf="!isEditing" [disabled]="isLoading">
+                    <span *ngIf="!isLoading">Cadastrar</span>
+                    <span *ngIf="isLoading">
+                        <span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
+                        Enviando...
+                    </span>
                 </button>
-                <button type="submit" class="btn btn-warning" *ngIf="isEditing">
-                    Atualizar
+
+                <button type="submit" class="btn btn-warning" *ngIf="isEditing" [disabled]="isLoading">
+                    <span *ngIf="!isLoading">Atualizar</span>
+                    <span *ngIf="isLoading">
+                        <span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
+                        Atualizando...
+                    </span>
                 </button>
-                <button type="button" class="btn btn-secondary" (click)="cancelEdit()">
-                    Cancelar
+
+                <button type="submit" class="btn btn-secondary" [disabled]="isLoading">
+                    <span *ngIf="!isLoading">Cancelar</span>
+                    <span *ngIf="isLoading">
+                        <span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
+                        Aguarde...
+                    </span>
                 </button>
             </div>
         </form>
