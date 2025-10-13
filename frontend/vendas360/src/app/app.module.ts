@@ -10,14 +10,14 @@ import { LOCALE_ID } from '@angular/core';
 import  locale_pt  from '@angular/common/locales/pt';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './components/header/header.component';
-import { SellerFormComponent } from './components/seller-form/seller-form.component';
-import { SellerListComponent } from './components/sellers-list/sellers-list.component';
-import { SellerTableComponent } from './components/sellers-table/sellers-table.component';
+import { HeaderComponent } from './pages/register/components/header/header.component';
+import { SellerFormComponent } from './pages/register/components/seller-form/seller-form.component';
+import { SellerListComponent } from './pages/register/components/sellers-list/sellers-list.component';
+import { SellerTableComponent } from './pages/register/components/sellers-table/sellers-table.component';
 import { registerLocaleData } from '@angular/common';
-import { EmptyTableMsgComponent } from './components/empty-table-msg/empty-table-msg.component';
+import { EmptyTableMsgComponent } from './pages/register/components/empty-table-msg/empty-table-msg.component';
 import { NgxMaskModule } from 'ngx-mask';
-import { NavbarComponent } from './components/navbar/navbar.component';
+import { NavbarComponent } from './shared/components/navbar/navbar.component';
 
 registerLocaleData(locale_pt);
 

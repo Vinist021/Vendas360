@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, finalize, switchMap, take, tap } from 'rxjs/operators';
-import { Seller } from '../interfaces/Seller';
+import { Seller } from '../interfaces/Seller'; 
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 

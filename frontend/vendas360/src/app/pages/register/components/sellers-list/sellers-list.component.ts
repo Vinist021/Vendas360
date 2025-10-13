@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { SellerSharedService } from 'src/app/services/seller-shared.service';
+import { SellerSharedService } from 'src/app/shared/services/seller-shared.service'; 
 
 @Component({
   selector: 'app-seller-list',

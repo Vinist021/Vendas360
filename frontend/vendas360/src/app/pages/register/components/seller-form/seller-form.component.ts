@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Seller } from 'src/app/interfaces/Seller';
-import { SellerSharedService } from 'src/app/services/seller-shared.service';
+import { Seller } from 'src/app/shared/interfaces/Seller';
+import { SellerSharedService } from 'src/app/shared/services/seller-shared.service';
 import { Subject, takeUntil } from 'rxjs';
-import { MessageService } from 'src/app/services/message-service';
+import { MessageService } from 'src/app/shared/services/message-service';
 
 @Component({
   selector: 'app-seller-form',
