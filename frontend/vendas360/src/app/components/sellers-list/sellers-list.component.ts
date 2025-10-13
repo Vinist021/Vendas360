@@ -4,8 +4,8 @@ import { SellerSharedService } from 'src/app/services/seller-shared.service';
 
 @Component({
   selector: 'app-seller-list',
-  templateUrl: './seller-list.component.html',
-  styleUrls: ['./seller-list.component.css']
+  templateUrl: './sellers-list.component.html',
+  styleUrls: ['./sellers-list.component.css']
 })
 export class SellerListComponent implements OnInit {
 
