@@ -20,6 +20,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { HomeComponent } from './pages/home/home.component';
+import { GenderChartComponent } from './pages/home/charts/gender-chart/gender-chart.component';
 
 registerLocaleData(locale_pt);
 
@@ -34,6 +35,7 @@ registerLocaleData(locale_pt);
     NavbarComponent,
     RegisterComponent,
     HomeComponent,
+    GenderChartComponent,
   ],
   imports: [
     BrowserModule,
