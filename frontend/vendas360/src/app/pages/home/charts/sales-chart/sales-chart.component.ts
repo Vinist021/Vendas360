@@ -17,17 +17,16 @@ export class SalesChartComponent implements AfterViewInit {
     new Chart(canvas, {
       type: 'bar',
       data: {
-        labels: ['João', 'Maria', 'Carlos', 'Ana', 'Pedro', 'Luiza'],
+        labels: ['João das Couves', 'Teste da Silva', 'Maria das Dores', 'Ana Maria', 'José Carlos'],
         datasets: [{
           label: 'Vendas (R$)',
-          data: [12000, 9500, 7800, 11000, 6500, 8800],
+          data: [3000, 4000, 2500, 3200, 4500],
           backgroundColor: [
             'rgba(37, 99, 235, 0.7)',
             'rgba(16, 185, 129, 0.7)',
             'rgba(37, 99, 235, 0.7)',
             'rgba(16, 185, 129, 0.7)',
             'rgba(37, 99, 235, 0.7)',
-            'rgba(16, 185, 129, 0.7)'
           ],
           borderColor: [
             'rgba(37, 99, 235, 1)',
@@ -35,7 +34,6 @@ export class SalesChartComponent implements AfterViewInit {
             'rgba(37, 99, 235, 1)',
             'rgba(16, 185, 129, 1)',
             'rgba(37, 99, 235, 1)',
-            'rgba(16, 185, 129, 1)'
           ],
           borderWidth: 1
         }]

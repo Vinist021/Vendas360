@@ -17,7 +17,7 @@ export class GenderChartComponent implements AfterViewInit {
       data: {
         labels: ['Masculino', 'Feminino', 'Outros'],
         datasets: [{
-          data: [65, 30, 5],
+          data: [2, 3, 0],
           backgroundColor: [
             'rgba(37, 99, 235, 0.7)',
             'rgba(236, 72, 153, 0.7)',
