@@ -19,6 +19,7 @@ import { EmptyTableMsgComponent } from './pages/register/components/empty-table-
 import { NgxMaskModule } from 'ngx-mask';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { HomeComponent } from './pages/home/home.component';
 
 registerLocaleData(locale_pt);
 
@@ -32,6 +33,7 @@ registerLocaleData(locale_pt);
     EmptyTableMsgComponent,
     NavbarComponent,
     RegisterComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
