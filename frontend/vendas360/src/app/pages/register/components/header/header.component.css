@@ -1,3 +1,8 @@
+.subtitle {
+  height: 60px;          
+  visibility: hidden;     
+}
+
 .success-message {
     background: linear-gradient(45deg, #d4edda, #c3e6cb);
     color: #155724;
