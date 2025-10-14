@@ -4,6 +4,13 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Titles */
+
+div .lead {
+    color: #6c757d;
+    font-size: 1.5rem;
+}
+
 /* Cards */
 .card {
     border: none;

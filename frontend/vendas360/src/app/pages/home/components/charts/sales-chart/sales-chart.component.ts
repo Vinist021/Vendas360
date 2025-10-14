@@ -19,7 +19,7 @@ export class SalesChartComponent implements AfterViewInit {
       data: {
         labels: ['João das Couves', 'Teste da Silva', 'Maria das Dores', 'Ana Maria', 'José Carlos'],
         datasets: [{
-          label: 'Vendas (R$)',
+          label: 'Salário (R$)',
           data: [3000, 4000, 2500, 3200, 4500],
           backgroundColor: [
             'rgba(37, 99, 235, 0.7)',

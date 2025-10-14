@@ -10,7 +10,7 @@ import { LOCALE_ID } from '@angular/core';
 import  locale_pt  from '@angular/common/locales/pt';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './pages/register/components/header/header.component';
+import { RegisterHeaderComponent } from './pages/register/components/header/header.component';
 import { SellerFormComponent } from './pages/register/components/seller-form/seller-form.component';
 import { SellerListComponent } from './pages/register/components/sellers-list/sellers-list.component';
 import { SellerTableComponent } from './pages/register/components/sellers-table/sellers-table.component';
@@ -20,15 +20,16 @@ import { NgxMaskModule } from 'ngx-mask';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { HomeComponent } from './pages/home/home.component';
-import { GenderChartComponent } from './pages/home/charts/gender-chart/gender-chart.component';
-import { SalesChartComponent } from './pages/home/charts/sales-chart/sales-chart.component';
+import { GenderChartComponent } from './pages/home/components/charts/gender-chart/gender-chart.component';
+import { SalesChartComponent } from './pages/home/components/charts/sales-chart/sales-chart.component';
+import { HomeHeaderComponent } from './pages/home/components/header/header.component';
 
 registerLocaleData(locale_pt);
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
+    HomeHeaderComponent,
     SellerFormComponent,
     SellerListComponent,
     SellerTableComponent,
@@ -38,6 +39,7 @@ registerLocaleData(locale_pt);
     HomeComponent,
     GenderChartComponent,
     SalesChartComponent,
+    RegisterHeaderComponent
   ],
   imports: [
     BrowserModule,
