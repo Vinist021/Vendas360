@@ -104,6 +104,7 @@ export class SellerFormComponent implements OnInit, OnDestroy {
     this.sellerForm.reset();
     this.isEditing = false;
     this.formTitle = 'Cadastrar Vendedor';
+    this.sellerService.clearSelectedSeller();
   }
 
   getFieldClass(field: string): string {
