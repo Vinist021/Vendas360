@@ -17,7 +17,7 @@
         <td class="table-text">{{ seller.salary | currency: 'BRL' }}</td>
         <td class="table-text">{{ (seller.bonus / 100) | percent: '1.2-2'}}</td>
         <td class="table-text">
-          {{ seller.gender == 0 ? 'Masculino' : seller.gender == 1 ? 'Feminino' : 'Outro' }}</td>
+          {{ seller.gender == 0 ? 'Feminino' : seller.gender == 1 ? 'Masculino' : 'Outro' }}</td>
         <td class="d-flex justify-content-center align-items-center text-nowrap">
           <button class="btn btn-warning btn-sm me-1" (click)="editSeller(seller)">
             <i class="bi bi-pencil"></i>
