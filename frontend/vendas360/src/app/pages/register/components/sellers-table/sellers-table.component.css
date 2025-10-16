@@ -1,3 +1,19 @@
+.badge {
+  font-size: 0.85rem;      
+  padding: 0.5em 1em;      
+  border-radius: 50px;     
+  font-weight: 500;        
+  min-width: 90px;         
+  text-align: center;      
+  margin-left: 8%;
+}
+
+
+.bg-pink {
+  background-color: #e83e8c; 
+  color: white;              
+}
+
 .table-text {
   font-weight: 600;
   color: #3b4146;

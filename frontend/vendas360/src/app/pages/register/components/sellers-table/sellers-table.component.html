@@ -17,11 +17,20 @@
         <td class="table-text">{{ seller.salary | currency: 'BRL' }}</td>
         <td class="table-text">{{ (seller.bonus / 100) | percent: '1.2-2'}}</td>
         <td class="table-text">
-          {{ seller.gender == 0 ? 'Feminino' : seller.gender == 1 ? 'Masculino' : 'Outro' }}</td>
+          <span 
+          class="badge" 
+          [ngClass]="{
+             'bg-pink': seller.gender === 0,  
+             'bg-primary': seller.gender === 1,   
+             'bg-success': seller.gender !== 0 && seller.gender !== 1 
+          }">
+            {{ seller.gender == 0 ? 'Feminino' : seller.gender == 1 ? 'Masculino' : 'Outro' }}
+          </span>
+        </td>
         <td class="d-flex justify-content-center align-items-center text-nowrap">
           <button class="btn btn-warning btn-sm me-1" (click)="editSeller(seller)">
             <i class="bi bi-pencil"></i>
-          </button>         
+          </button>
           <button class="btn btn-danger btn-sm" (click)="deleteSeller(seller.id)">
             <i class="bi bi-trash"> </i>
           </button>
