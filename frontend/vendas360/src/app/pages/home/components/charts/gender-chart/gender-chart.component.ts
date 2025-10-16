@@ -1,5 +1,7 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
+import { SellerSharedService } from 'src/app/shared/services/seller-shared.service';
+import { Subscription } from 'rxjs';
 
 Chart.register(...registerables);
 
@@ -8,16 +10,22 @@ Chart.register(...registerables);
   templateUrl: './gender-chart.component.html',
   styleUrls: ['./gender-chart.component.css']
 })
-export class GenderChartComponent implements AfterViewInit {
+export class GenderChartComponent implements AfterViewInit, OnDestroy {
+
+  private chart!: Chart;
+  private subscription!: Subscription;
+
+  constructor(private sellerService: SellerSharedService) { }
 
   ngAfterViewInit(): void {
     const genderCtx = document.getElementById('genderChart') as HTMLCanvasElement;
-    new Chart(genderCtx, {
+
+    this.chart = new Chart(genderCtx, {
       type: 'doughnut',
       data: {
-        labels: ['Masculino', 'Feminino', 'Outros'],
+        labels: ['Feminino', 'Masculino', 'Outros'],
         datasets: [{
-          data: [2, 3, 0],
+          data: [0, 0, 0],
           backgroundColor: [
             'rgba(37, 99, 235, 0.7)',
             'rgba(236, 72, 153, 0.7)',
@@ -41,5 +49,23 @@ export class GenderChartComponent implements AfterViewInit {
         }
       }
     });
+
+    this.subscription = this.sellerService.sellers$.subscribe(sellers => {
+      const femaleCount = sellers.filter(s => s.gender === 0).length;
+      const maleCount = sellers.filter(s => s.gender === 1).length;
+      const otherCount = sellers.filter(s => s.gender !== 0 && s.gender !== 1).length;
+
+      this.chart.data.datasets[0].data = [maleCount, femaleCount, otherCount];
+      this.chart.update();
+    });
+
+    this.sellerService.getSellers().subscribe();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+    if (this.chart) {
+      this.chart.destroy();
+    }
   }
 }
