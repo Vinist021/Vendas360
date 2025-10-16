@@ -15,7 +15,7 @@ export class SalesChartComponent implements AfterViewInit, OnDestroy {
   private chart!: Chart;
   private sellersSub!: Subscription;
 
-  constructor(private sellerService: SellerSharedService) {}
+  constructor(private sellerService: SellerSharedService) { }
 
   ngAfterViewInit(): void {
     const canvas = document.getElementById('salesChart') as HTMLCanvasElement;
@@ -52,32 +52,47 @@ export class SalesChartComponent implements AfterViewInit, OnDestroy {
     });
   }
 
-private updateChart(sellers: Seller[]) {
-  
-  const labels = sellers.map(s => s.name);
-  const data = sellers.map(s => s.salary);
+  private updateChart(sellers: Seller[]) {
+    
+    const labels = sellers.map(s => s.name);
+    const data = sellers.map(s => s.salary);
 
-  
-  const backgroundColors = sellers.map((_, index) =>
-    index % 2 === 0
-      ? 'rgba(37, 99, 235, 0.7)'   
-      : 'rgba(16, 185, 129, 0.7)'  
-  );
+    // 🎨 Define a cor conforme o gênero
+    const backgroundColors = sellers.map(s => {
+      switch (s.gender) {
+        case 0:
+          return 'rgba(236, 72, 153, 0.7)'; 
+        case 1:
+          return 'rgba(37, 99, 235, 0.7)'; 
+        case 2:
+          return 'rgba(16, 185, 129, 0.7)'; 
+        default:
+          return 'rgba(156, 163, 175, 0.7)'; 
+      }
+    });
 
-  const borderColors = sellers.map((_, index) =>
-    index % 2 === 0
-      ? 'rgba(37, 99, 235, 1)'
-      : 'rgba(16, 185, 129, 1)'
-  );
+    const borderColors = sellers.map(s => {
+      switch (s.gender) {
+        case 0:
+          return 'rgba(236, 72, 153, 1)';
+        case 1:
+          return 'rgba(37, 99, 235, 1)';
+        case 2:
+          return 'rgba(16, 185, 129, 1)';
+        default:
+          return 'rgba(156, 163, 175, 1)';
+      }
+    });
 
-  this.chart.data.labels = labels;
-  this.chart.data.datasets[0].data = data;
-  this.chart.data.datasets[0].backgroundColor = backgroundColors;
-  this.chart.data.datasets[0].borderColor = borderColors;
-  this.chart.update();
-}
+    this.chart.data.labels = labels;
+    this.chart.data.datasets[0].data = data;
+    this.chart.data.datasets[0].backgroundColor = backgroundColors;
+    this.chart.data.datasets[0].borderColor = borderColors;
+    this.chart.update();
+  }
 
   ngOnDestroy(): void {
     if (this.sellersSub) this.sellersSub.unsubscribe();
+    if (this.chart) this.chart.destroy();
   }
 }
