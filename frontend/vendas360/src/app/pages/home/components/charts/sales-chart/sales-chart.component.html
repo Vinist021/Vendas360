@@ -9,6 +9,47 @@
       <div class="chart-container position-relative">
         <canvas id="salesChart"></canvas>
       </div>
+
+      <!-- navigation controls -->
+      <div class="pagination-controls mt-3" *ngIf="totalPages > 1">
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="page-info">
+            <small class="text-muted">{{ currentPageInfo }}</small>
+          </div>
+
+          <!-- navigation buttons -->
+          <div class="d-flex gap-2">
+            <button 
+              class="btn btn-outline-secondary btn-sm" 
+              [disabled]="!hasPreviousPage"
+              (click)="previousPage()"
+              title="Página anterior">
+              <i class="bi bi-chevron-left"></i>
+            </button>
+
+            <!-- page numbers -->
+            <div class="d-flex gap-1">
+              <button 
+                *ngFor="let page of getPageNumbers()" 
+                class="btn btn-sm"
+                [class.btn-primary]="page === currentPage"
+                [class.btn-outline-secondary]="page !== currentPage"
+                (click)="goToPage(page)"
+                [title]="'Ir para página ' + (page + 1)">
+                {{ page + 1 }}
+              </button>
+            </div>
+
+            <button 
+              class="btn btn-outline-secondary btn-sm" 
+              [disabled]="!hasNextPage"
+              (click)="nextPage()"
+              title="Próxima página">
+              <i class="bi bi-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
