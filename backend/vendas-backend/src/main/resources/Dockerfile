@@ -8,6 +8,9 @@ WORKDIR /app
 COPY mvnw pom.xml ./
 COPY .mvn .mvn
 
+# Permissão de execução
+RUN chmod +x mvnw
+
 # Baixa dependências sem compilar ainda
 RUN ./mvnw dependency:go-offline -B
 
