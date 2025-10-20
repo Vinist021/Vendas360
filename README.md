@@ -14,7 +14,7 @@
 ### Backend (Spring Boot)
 - **Framework**: Spring Boot 3.5.6
 - **Java**: 17
-- **Banco de Dados**: H2 (in-memory)
+- **Banco de Dados**: PostgreSQL 42.7.7
 - **ORM**: JPA/Hibernate
 - **Validação**: Bean Validation
 - **API**: RESTful
@@ -34,13 +34,13 @@
 - **Validação** de dados com Bean Validation
 - **Tratamento de exceções** centralizado
 - **CORS** configurado para comunicação com frontend
-- **Banco H2** com dados iniciais pré-carregados
+- **Banco PostgreSQL** para armazenamento dos dados
 
 ### 🎨 Frontend
 - **Dashboard** com gráficos interativos
 - **Cadastro de vendedores** com formulário validado
 - **Listagem** de vendedores em tabela
-- **Edição** e **exclusão** de vendedores
+- **Edição e exclusão** de vendedores
 - **Interface responsiva** com Bootstrap
 - **Gráficos** de salário por vendedor e distribuição por gênero
 
@@ -56,86 +56,22 @@ Cadastro_Vendedores/
 │       │       ├── models/          # Entidades JPA
 │       │       ├── repositories/    # Repositórios JPA
 │       │       ├── services/        # Lógica de negócio
-│       │       └── dtos/           # Data Transfer Objects
+│       │       └── dtos/            # Data Transfer Objects
 │       └── src/main/resources/
-│           ├── application.properties
-│           └── data.sql           # Dados iniciais
-└── frontend/
-    └── vendas360/                 # Aplicação Angular
-        ├── src/app/
-        │   ├── pages/
-        │   │   ├── home/          # Dashboard principal
-        │   │   └── register/     # Cadastro de vendedores
-        │   ├── shared/           # Componentes compartilhados
-        │   └── services/         # Serviços Angular
-        └── package.json
+│           └── application.properties # Configurações do banco de dados
+├── frontend/
+│    └── vendas360/                # Aplicação Angular
+│        ├── src/app/
+│        │   ├── pages/
+│        │   │   ├── home/         # Dashboard principal
+│        │   │   └── register/     # Cadastro de vendedores
+│        │   ├── shared/           # Componentes compartilhados
+│        │   └── services/         # Serviços Angular
+│        └── package.json
+└── .github
+      └── workflows
+            └── keepalive.yml      # Previne inatividade do backend
 ```
-
-## 🚀 Como Executar o Projeto
-
-### Pré-requisitos
-- **Java 17** ou superior
-- **Node.js 16** ou superior
-- **Maven 3.6** ou superior
-- **Angular CLI 14** ou superior
-
-### 🔧 Backend (Spring Boot)
-
-1. **Navegue para o diretório do backend:**
-   ```bash
-   cd backend/vendas-backend
-   ```
-
-2. **Execute a aplicação:**
-   ```bash
-   ./mvnw spring-boot:run
-   ```
-   
-   **Windows:**
-   ```bash
-   mvnw.cmd spring-boot:run
-   ```
-
-   ou clique no botão run em `VendasBackendApplication.java`
-   
-   <img width="595" height="170" alt="image" src="https://github.com/user-attachments/assets/d83cf60c-2422-41b0-82e2-4e0beaaf237e" />
-
-
-4. **Acesse a API:**
-   - **URL Base**: `http://localhost:8080`
-   - **H2 Console**: `http://localhost:8080/h2-console`
-   - **JDBC URL**: `jdbc:h2:mem:testdb`
-   - **Username**: `sa`
-   - **Password**: (vazio)
-
-### 🎨 Frontend (Angular)
-
-1. **Navegue para o diretório do frontend:**
-   ```bash
-   cd frontend/vendas360
-   ```
-
-2. **Instale as dependências:**
-   ```bash
-   npm install
-   ```
-      ```bash
-   npm install angular
-   ```
-
-3. **Execute a aplicação:**
-   ```bash
-   npm start
-   ```
-   
-   ou
-   
-   ```bash
-   ng serve
-   ```
-
-4. **Acesse a aplicação:**
-   - **URL**: `http://localhost:4200`
 
 ## 📊 API Endpoints
 
@@ -189,47 +125,16 @@ Cadastro_Vendedores/
 - **Spring Data JPA** - Persistência de dados
 - **Spring Web** - API REST
 - **Spring Validation** - Validação de dados
-- **H2 Database** - Banco de dados em memória
+- **PostgreSQL** - Banco de dados
 - **Maven** - Gerenciamento de dependências
 
 ### Frontend
 - **Angular 14.1.0** - Framework SPA
-- **Bootstrap 5.3.8** - Framework CSS
+- **Bootstrap 5.3.8** - Biblioteca CSS
 - **Chart.js 4.5.1** - Gráficos interativos
 - **ngx-mask 14.3.3** - Máscaras de input
 - **Bootstrap Icons** - Ícones
 - **TypeScript** - Linguagem de programação
-
-## 🔧 Configurações
-
-### Backend (application.properties)
-```properties
-spring.application.name=vendas-backend
-server.error.include-stacktrace=never
-spring.datasource.url=jdbc:h2:mem:testdb
-spring.datasource.username=sa
-spring.datasource.password=
-spring.jpa.defer-datasource-initialization=true
-```
-
-### Frontend (package.json)
-- **Angular**: 14.1.0
-- **Bootstrap**: 5.3.8
-- **Chart.js**: 4.5.1
-- **ngx-mask**: 14.3.3
-
-## 📈 Dados Iniciais
-
-O sistema vem pré-carregado com dados de exemplo:
-
-```sql
-INSERT INTO TBL_SELLER (NAME, SALARY, BONUS, GENDER) VALUES 
-('Joao das Couves', 3000.00, 500.00, 1),
-('Teste da Silva', 4000.00, 200.00, 1),
-('Maria das Dores', 2500.00, 300.00, 0),
-('Ana Maria', 3200.00, 400.00, 0),
-('Jose Carlos', 4500.00, 0.00, 1);
-```
 
 ## 🔍 Estrutura de Componentes (Frontend)
 
@@ -239,7 +144,6 @@ INSERT INTO TBL_SELLER (NAME, SALARY, BONUS, GENDER) VALUES
 
 ### Componentes Compartilhados
 - **Navbar**: Navegação principal
-- **Header**: Cabeçalhos das páginas
 
 ### Componentes Específicos
 - **Seller Form**: Formulário de cadastro
@@ -256,32 +160,16 @@ INSERT INTO TBL_SELLER (NAME, SALARY, BONUS, GENDER) VALUES
 - **Ícones** do Bootstrap Icons
 - **Formulários validados** com feedback visual
 
-## 🔧 Desenvolvimento
-
-### Estrutura do Backend
-```
-controllers/     # Controladores REST
-├── exceptions/  # Tratamento de exceções
-models/         # Entidades JPA
-repositories/   # Repositórios de dados
-services/       # Lógica de negócio
-├── exceptions/ # Exceções customizadas
-dtos/          # Objetos de transferência
-```
-
-### Estrutura do Frontend
-```
-pages/          # Páginas da aplicação
-├── home/       # Dashboard
-└── register/   # Cadastro
-shared/         # Componentes compartilhados
-services/       # Serviços Angular
-interfaces/     # Interfaces TypeScript
-```
-
 ## 📝 Licença
 
 Este projeto é um sistema de demonstração desenvolvido para fins educacionais.
+
+
+
+## 🚀 Executar o projeto localmente
+
+Para isso, acesse a branch "local" deste repositório:
+[Acesse aqui](https://github.com/Vinist021/Vendas360/tree/local)
 
 ---
 

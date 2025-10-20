@@ -3,9 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  apiBaseUrl: 'http://localhost:8080'
+  production: true,
+  apiBaseUrl: (window as any)['__env__']?.API_BASE_URL || 'http://localhost:8080'
 };
+
 
 /*
  * For easier debugging in development mode, you can import the following file

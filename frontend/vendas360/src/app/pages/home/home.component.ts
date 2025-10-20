@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { map, Observable } from 'rxjs';
+import { SellerSharedService } from 'src/app/shared/services/seller-shared.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  total$: Observable<number>;
+
+  constructor(private sellerService: SellerSharedService) {
+    this.total$ = this.sellerService.sellers$.pipe(
+      map(sellers => sellers.length)
+    );
+  }
 
   ngOnInit(): void {
+    this.sellerService.getSellers().subscribe();
   }
 
 }
