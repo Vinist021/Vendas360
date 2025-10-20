@@ -27,13 +27,13 @@ export class GenderChartComponent implements AfterViewInit, OnDestroy {
         datasets: [{
           data: [0, 0, 0],
           backgroundColor: [
-            'rgba(37, 99, 235, 0.7)',
             'rgba(236, 72, 153, 0.7)',
+            'rgba(37, 99, 235, 0.7)',
             'rgba(16, 185, 129, 0.7)'
           ],
           borderColor: [
-            'rgba(37, 99, 235, 1)',
             'rgba(236, 72, 153, 1)',
+            'rgba(37, 99, 235, 1)',
             'rgba(16, 185, 129, 1)'
           ],
           borderWidth: 1
@@ -55,7 +55,7 @@ export class GenderChartComponent implements AfterViewInit, OnDestroy {
       const maleCount = sellers.filter(s => s.gender === 1).length;
       const otherCount = sellers.filter(s => s.gender !== 0 && s.gender !== 1).length;
 
-      this.chart.data.datasets[0].data = [maleCount, femaleCount, otherCount];
+      this.chart.data.datasets[0].data = [femaleCount, maleCount, otherCount];
       this.chart.update();
     });
 
