@@ -1,0 +1,17 @@
+name: Keep Render Alive
+
+on:
+  schedule:
+    # Executa a cada 14 minutos
+    - cron: "*/14 * * * *"
+  workflow_dispatch: 
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Enviar requisição GET para o backend
+        run: |
+          echo "Pingando o servidor Render..."
+          curl -s -o /dev/null -w "%{http_code}\n" https://vendas360.onrender.com/sellers/1
