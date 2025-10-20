@@ -34,7 +34,7 @@ export class SellerFormComponent implements OnInit, OnDestroy {
     this.sellerForm = this.fb.group({
       id: [null],
       name: ['', [Validators.required, Validators.minLength(3)]],
-      salary: [null, [Validators.required, Validators.min(1500)]],
+      salary: [null, [Validators.required, Validators.min(1500), Validators.max(10000)]],
       bonus: [null, Validators.required],
       gender: ['', Validators.required]
     });

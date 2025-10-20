@@ -24,6 +24,7 @@
                 <small *ngIf="salary?.touched && salary?.invalid" class="text-danger text-small ms-2">
                     <span *ngIf="salary?.errors?.['required']">* O salário é requerido.</span>
                     <span *ngIf="salary?.errors?.['min']">* Mínimo de R$ 1500,00.</span>
+                    <span *ngIf="salary?.errors?.['max']">* Máximo de R$ 10.000,00.</span>
                 </small>
             </div>
 
