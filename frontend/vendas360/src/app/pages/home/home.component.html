@@ -1,6 +1,6 @@
 <div class="container rounded shadow px-md-5">
     <home-header></home-header>
-    <div class="row">
+    <div *ngIf="(total$ | async)" class="row">
         <div class="col-lg-6">
             <div class="container">
                 <app-sales-chart></app-sales-chart>
@@ -10,6 +10,21 @@
         <div class="col-lg-6">
             <div class="container">
                 <app-gender-chart></app-gender-chart>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="(total$ | async) === 0">
+        <div class="empty-state-container text-center my-5">
+            <div class="empty-state-card shadow-sm p-5 rounded-4 d-inline-block">
+                <div class="icon-wrapper mb-3">
+                    <i class="bi bi-people text-secondary fs-1"></i>
+                </div>
+                <h4 class="fw-semibold text-dark mb-2">Nenhum vendedor cadastrado</h4>
+                <p class="text-muted mb-4">Adicione um novo vendedor ou aguarde o carregamento para visualizar estatísticas e gráficos.</p>
+                <button class="btn btn-primary px-4 rounded-pill" routerLink="/vendedores">
+                    <i class="bi bi-plus-lg me-2"></i>Adicionar vendedor
+                </button>
             </div>
         </div>
     </div>
